@@ -28,14 +28,47 @@
     // Array.prototype.some() // is at least one person 19 or older?
     // Array.prototype.every() // is everyone 19 or older?
 
+   // let adult = people.some(person  => ((new Date()).getFullYear()) - person.year >= 19); // shortest version
+ 
+    let adult = people.some(person => {
+      let currentYear = ((new Date()).getFullYear());
+      return currentYear - person.year >= 19;
+    })
+
+      console.log(adult); // returns true because there is atleast one match
+
+    let allAdult = people.every(person => {
+      let currentYear = ((new Date()).getFullYear());
+      return currentYear - person.year >= 19;
+    })
+
+    console.log(allAdult); //returns false because not all 
+
     // Array.prototype.find()
     // Find is like filter, but instead returns just the one you are looking for
     // find the comment with the ID of 823423
 
+    let findId = comments.find(person =>{return person.id  === 823423;}) 
+
+    console.log(findId); //returns the first that match
     // Array.prototype.findIndex()
     // Find the comment with this ID
     // delete the comment with the ID of 823423
 
+    let delComment = comments.findIndex(comment => {comment.id == 823423});
+
+    //comments.splice(delComment, 1); //
+
+  //console.table(delComment); //returns the array without the comment bec of splice
+
+// splice method below creates new array with the deleted comment, instead of just slicing it from the original array;
+
+    let newComments = [
+      ...comments.slice(0, delComment), //copy from the index[0] until the deleted comment
+      ...comments.slice(delComment + 1) // copy from the deleted comment until end thats why no (,)
+    ];
+
+    console.table(newComments);
   </script>
 </body>
 </html>
